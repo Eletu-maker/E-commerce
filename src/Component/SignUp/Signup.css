@@ -1,0 +1,15 @@
+.signup{
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    background: black;
+    color: white
+}
+
+.signup span{
+    cursor: pointer;
+}
+
+.signup span:hover{
+    text-decoration: underline;
+}

@@ -1,0 +1,147 @@
+
+
+.order-details .order-details-name{
+    font-family: 'integral cf';
+    font-weight: 700;
+  
+    font-size: 40px;
+    
+}
+
+.order-details .order-details-price{
+    font-family: 'satoshi';
+    font-weight: 700;
+    
+    font-size: 32px;
+    
+} 
+
+.order-details .order-details-description{
+    font-family: 'satoshi';
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 16px;
+    
+}
+
+.order-details .order-details-description{
+    font-family: 'satoshi';
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 16px;
+    
+}
+
+.oder p{
+    margin: 5px 0;
+}
+
+.order-details-choice{
+    font-family: 'satoshi';
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 16px;
+}
+
+.order-details-choice .color{
+    display: flex;
+    gap: 10px;
+}
+
+.order-details-choice .color .blue{
+    width: 37px;
+    background-color: blue;
+    border-radius: 50%;
+}
+
+.size, .the-cart{
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+
+.size .order-details-size{
+    background: rgba(0, 0, 0, 0.4);
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.size .order-details-size:hover{
+    background: black;
+    color: white;
+    transform: scale(1.04);
+}
+
+
+.the-cart .count{
+    display: flex;
+
+}
+
+
+.decrement{
+    background: rgba(0, 0, 0, 0.4);
+    padding: 2px 5px;
+    border-radius: 20px 0 0 20px;
+    cursor: pointer;
+}
+
+.decrement:hover ,.increment:hover{
+    background: black;
+    color: white;
+}
+.increment{
+    background: rgba(0, 0, 0, 0.4);
+    padding: 2px 5px;
+    border-radius: 0 20px  20px 0;
+     cursor: pointer;
+}
+
+.value{
+   background: rgba(0, 0, 0, 0.4);
+    padding: 2px 5px; 
+}
+
+
+.add-cart{
+    color: white;
+    background: black;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.order-display{
+    display: flex;
+    gap: 10px;
+
+}
+
+.small-display{
+   display: flow-root;
+  
+}
+
+.oder{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+
+.big-display img{
+    width: 400px;
+    height: 400px;
+    border: groove;
+}
+
+
+.small-image{
+    width: 100px;
+    height: 100px;
+}
+
+.small-image:hover{
+    border: groove;
+}

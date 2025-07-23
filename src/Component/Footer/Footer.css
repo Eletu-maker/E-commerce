@@ -1,0 +1,124 @@
+.footer-top{
+    background: black;
+    border-radius: 50px;
+    display: flex;
+        justify-content: space-evenly;
+            align-items: center;
+            margin: 20px 50px;
+            padding: 25px;
+    position: relative;
+    top: 110px;
+
+}
+
+.footer-top-text p{
+    color: white;
+    font-family: 'integral cf';
+    font-weight: 700;
+    font-size: 40px;
+    font-style: bold;
+    line-height: 45px;
+
+}
+
+.footer-top-button .input{
+    background: white;
+    width: 400px;
+    padding: 12px ;
+    border-radius: 40px;
+    display: flex;
+    margin-bottom: 20px;
+    
+}
+
+.footer-top-button input{
+        border: none;
+    outline: none;
+    width: 400px;
+    background: transparent;
+    padding-left: 10px;
+
+}
+
+.footer-top-button button{
+    width: 400px;
+    padding: 10px;
+    border-radius: 40px;
+    font-family: 'Satoshi';
+    font-weight: 500;
+    font-style: medium;
+    font-size: 16px;
+}
+
+.footer-buttom .logo h1{
+    font-family: 'integral cf';
+    font-weight: 700;
+    font-style: bold;
+    font-size: 33.45px;
+}
+
+.footer-buttom .logo p{
+    font-family: 'Satoshi';
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.footer-buttom .logo .twitter{
+    background: white;
+    border-radius: 50%;
+     margin-left: 10px;
+}
+
+
+.footer-buttom .logo .fb{
+    background: black;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.footer-buttom{
+    background: #f0f0f0;
+    
+    
+
+}
+
+
+.footer-collection{
+display: flex;
+    justify-content: space-evenly;
+    padding-top: 130px;
+}
+
+.footer-buttom-list ul{
+    list-style: none;
+}
+
+.footer-buttom-list h2{
+    font-family: 'Satoshi';
+    font-weight: 500;
+    font-size: 16px;
+    padding-bottom: 10px;
+}
+
+.footer-buttom-list li{
+    padding: 5px 0;
+    font-family: 'Satoshi';
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+}
+
+.end{
+    padding: 20px 40px 40px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.end .end-img{
+    display: flex;
+}

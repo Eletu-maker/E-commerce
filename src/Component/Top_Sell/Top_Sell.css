@@ -1,0 +1,46 @@
+.top-sell{
+    padding: 25px ;
+}
+
+.top-sell h1{
+    display: flex;
+    justify-content: center;
+    font-family: 'integral cf', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    font-weight: bold;
+    padding: 20px 0;
+    
+
+   
+}
+
+
+
+.top-sell-container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.item-image{
+    width: 295px;
+    height: 298px;
+    border-radius: 50px;
+}
+
+.item-name{
+    font-family: 'satoshi';
+    font-weight: 700;
+    font-style: bold;
+    font-size: 20px;
+}
+
+.item-price{
+    font-family: 'satoshi';
+    font-weight: 700;
+    font-style: bold;
+    font-size: 24px;
+}
