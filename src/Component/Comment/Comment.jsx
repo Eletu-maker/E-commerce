@@ -33,7 +33,7 @@ const Comment = () => {
     <div className='comment'>
       <h1>OUR HAPPY CUSTOMERS</h1>
       <div className="comment-containers" ref={cardsRef}>
-       {comments.map((data,index)=>{
+       {comments.slice().reverse().map((data,index)=>{
         return(
            <div className="comment-container" key={index}>
             <p>{data.rating}</p>

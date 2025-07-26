@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import frame from '../../assets/Frame.png'
 import './Reviews.css'
 import comments from '../../assets/demo_data/comment_data'
+import MessageBox from '../messageBox/MessageBox'
+
 const Reviews = () => {
 
-
-    const firstFour = comments.slice(0, 2)
+    const [messageBox, setMessageBox] = useState(false)
+    const firstFour = comments.slice(-2)
   const [data, setData] = useState(firstFour)
 
   return (
@@ -17,12 +19,14 @@ const Reviews = () => {
                 <img src={frame} alt="" />
             </button>
             <button className="latest">latest</button>
-            <button className="write">Write a Review</button>
+            <button className="write" onClick={()=>setMessageBox(true)}>Write a Review</button>
         </div>
         
+        
      </div>
+     <div>{messageBox?<MessageBox condition = {()=>setMessageBox(false)}/>:""}</div>
         <div className="comments">
-            {data.map((data,index)=>{
+            {data.slice().reverse().map((data,index)=>{
                 return(
                     <div className="container" key={index}>
                         <div className="contsiner-top">

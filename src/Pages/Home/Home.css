@@ -2,3 +2,10 @@
 margin: 0 40px;
 
 }
+
+.welcome-user {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1rem;
+  color: #333;
+}

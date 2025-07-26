@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import './Order.css'
+import { useUser } from '../../UserContext'
 
 const Order = ({ theProduct }) => {
+  const {user} = useUser()
   const [apiData, setApiData] = useState(null)
   const [count, setCount] = useState(1)
+  const [cart,setCart]= useState([])
+  
   
   const [image,setImage] = useState(null)
+   console.log(user)
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${theProduct}`)
@@ -18,8 +23,21 @@ const Order = ({ theProduct }) => {
   const increment = () => setCount(count + 1)
   const decrement = () => setCount(count > 1 ? count - 1 : count)
 
+  const addToCart = () => {
+    
+    const product ={
+      good: `https://dummyjson.com/products/${theProduct}`,
+      num:count
+    }
+
+    setCart(prevItems =>[...prevItems ,product])
+    user.cart= [...cart, product];
+    alert("product added successfully")
+  }
+
   if (!apiData) return <p>Loading...</p>
 
+  
 
   return (
     <div className="oder">
@@ -63,7 +81,7 @@ const Order = ({ theProduct }) => {
             <p className='value'>{count}</p>
             <p className='increment' onClick={increment}>+</p>
           </div>
-          <div className="add-cart">
+          <div className="add-cart" onClick={addToCart}>
             Add to Cart
           </div>
         </div>
