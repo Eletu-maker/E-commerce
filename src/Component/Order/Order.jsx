@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import './Order.css'
 import { useUser } from '../../UserContext'
+import { db } from '../../firebase'
+import { doc, documentId, setDoc, updateDoc } from 'firebase/firestore'
+
 
 const Order = ({ theProduct }) => {
-  const {user} = useUser()
+ const { user, setUser } = useUser();
   const [apiData, setApiData] = useState(null)
   const [count, setCount] = useState(1)
-  const [cart,setCart]= useState([])
+   const [image,setImage] = useState(null)
   
-  
-  const [image,setImage] = useState(null)
-   console.log(user)
-
-  useEffect(() => {
+     useEffect(() => {
     fetch(`https://dummyjson.com/products/${theProduct}`)
       .then(res => res.json())
       .then(res => {setApiData(res) ; setImage(res.images[0])})
@@ -20,21 +19,46 @@ const Order = ({ theProduct }) => {
       .catch(err => console.error(err))
   }, [theProduct])
 
+
+
+const updateCartInFirestore = async (uid, newCart) => {
+  const userRef = doc(db, "users", uid);
+  try {
+    await setDoc(userRef, { cart: newCart }, { merge: true }); 
+    console.log("Cart updated in Firestore");
+  } catch (err) {
+    console.error("Failed to update cart:", err);
+  }
+};
+ 
+  const addToCart = async () => {
+  const product = {
+    good: `https://dummyjson.com/products/${theProduct}`,
+    num: count
+  };
+
+  const updatedCart = [...user.cart, product];
+console.log("Updating Firestore with cart:", updatedCart);
+  try {
+    
+    
+   await updateCartInFirestore(user.uid, updatedCart);
+   setUser({ ...user, cart: updatedCart });
+    alert("Product added successfully");
+  } catch (err) {
+    console.error(err);
+    alert("Failed to update cart. Try again.");
+  }
+};
+
+console.log(user)
+
+  
+
   const increment = () => setCount(count + 1)
   const decrement = () => setCount(count > 1 ? count - 1 : count)
 
-  const addToCart = () => {
-    
-    const product ={
-      good: `https://dummyjson.com/products/${theProduct}`,
-      num:count
-    }
-
-    setCart(prevItems =>[...prevItems ,product])
-    user.cart= [...cart, product];
-    alert("product added successfully")
-  }
-
+  
   if (!apiData) return <p>Loading...</p>
 
   

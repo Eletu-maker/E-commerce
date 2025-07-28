@@ -4,14 +4,15 @@ import profile from '../../assets/profile.png'
 import searchIcon from '../../assets/search.png'
 import './Navbar.css' 
 import Signup from '../SignUp/Signup'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 const Navbar = () => {
+    const navigate = useNavigate();
   return (
     <div>
         <Signup />
     <div className='navbar'>
         
-        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><h1>SHOP.CO</h1></Link>
+        <Link to="/Home" style={{ textDecoration: 'none', color: 'inherit' }}><h1>SHOP.CO</h1></Link>
         <ul>
             <li>Shop</li>
             <li>On Site</li>
@@ -25,7 +26,7 @@ const Navbar = () => {
             
         </div>
         <div className="cart">
-            <img src={cart} alt="Cart" className='Cart' />
+            <img onClick={()=>{navigate("/Cart")}} src={cart} alt="Cart" className='Cart' />
             
             </div>
         <div className="profile">

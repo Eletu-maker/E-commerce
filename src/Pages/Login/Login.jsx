@@ -42,6 +42,7 @@ try{
   if(!querySnapshot.empty){
     const userDoc = querySnapshot.docs[0].data();
     console.log("Fetched User Data:",userDoc)
+    console.log("Setting user after login", userDoc);
     setUser(userDoc);
   }else {
       alert("No user document found.");

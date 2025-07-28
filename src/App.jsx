@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import Login from './Pages/Login/Login';
 import ProtectedRoute from './Component/ProtectedRoute'; // 👈
 import { UserProvider } from './UserContext';
+import Cart from './Pages/Cart/Cart';
 
 
 function App() {
@@ -36,6 +37,14 @@ function App() {
       element: (
         <ProtectedRoute>
           <Product_Details />
+        </ProtectedRoute>
+      ),
+    },
+     {
+      path: '/Cart',
+      element: (
+        <ProtectedRoute>
+          <Cart />
         </ProtectedRoute>
       ),
     },
