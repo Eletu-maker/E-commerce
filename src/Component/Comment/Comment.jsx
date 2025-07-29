@@ -49,7 +49,7 @@ useEffect(() =>{
        {comments.slice().reverse().map((data,index)=>{
         return(
            <div className="comment-container" key={index}>
-            <p>{data.rating}</p>
+            <p>rating: {data.rating}/5</p>
             <h2 className='comment-name'>{data.name}</h2>
           <p className='comment-text'>{data.comment}</p>
           <div className="date">{data.date?.toDate? formatDistanceToNow(data.date.toDate(),{addSuffix: true}):"No date"}</div>

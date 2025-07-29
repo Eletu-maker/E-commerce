@@ -46,7 +46,7 @@ const Reviews = () => {
                 return(
                     <div className="container" key={index}>
                         <div className="contsiner-top">
-                            {data.rating}  <span>...</span>
+                            rating: {data.rating}/5  <span>...</span>
                         </div>
                         <h2 className="name">{data.name}</h2>
                         <div className="reviews">{data.comment}</div>
