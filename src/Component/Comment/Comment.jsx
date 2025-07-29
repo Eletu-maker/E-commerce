@@ -1,8 +1,13 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './Comment.css'
+import { formatDistanceToNow } from 'date-fns';
 import comments from '../../assets/demo_data/comment_data'
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { db } from '../../firebase';
+
 const Comment = () => {
 
+  const [comments, setComments] = useState([]);
 
   
     const cardsRef = useRef()
@@ -14,6 +19,14 @@ const Comment = () => {
   }
 };
 
+useEffect(() =>{
+  const loadComments = async () =>{
+    const q = query(collection(db,"comments"),orderBy("date","desc"));
+    const querySnapshot = await getDocs(q);
+    setComments(querySnapshot.docs.map(doc => doc.data()));
+  };
+  loadComments();
+},[])
 
    useEffect(() => {
     const container = cardsRef.current;
@@ -39,6 +52,7 @@ const Comment = () => {
             <p>{data.rating}</p>
             <h2 className='comment-name'>{data.name}</h2>
           <p className='comment-text'>{data.comment}</p>
+          <div className="date">{data.date?.toDate? formatDistanceToNow(data.date.toDate(),{addSuffix: true}):"No date"}</div>
       </div>
         )
        })}

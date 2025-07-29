@@ -1,13 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { formatDistanceToNow } from 'date-fns';
 import frame from '../../assets/Frame.png'
 import './Reviews.css'
-import comments from '../../assets/demo_data/comment_data'
 import MessageBox from '../messageBox/MessageBox'
+import { collection, getDocs, orderBy, query } from 'firebase/firestore'
+import { db } from '../../firebase'
 
 const Reviews = () => {
 
     const [messageBox, setMessageBox] = useState(false)
+     const [comments, setComments] = useState([]);
+     useEffect(()=>{
+        const loadComments = async () =>{
+            const q = query(collection(db,"comments"),orderBy("date","desc"));
+            const querySnapshot = await getDocs(q);
+            setComments(querySnapshot.docs.map((doc) => doc.data()));
+        };
+        loadComments();
+     },[])
+
+    
+    
     const firstFour = comments.slice(-2)
+
+    console.log(firstFour)
   const [data, setData] = useState(firstFour)
 
   return (
@@ -26,15 +42,15 @@ const Reviews = () => {
      </div>
      <div>{messageBox?<MessageBox condition = {()=>setMessageBox(false)}/>:""}</div>
         <div className="comments">
-            {data.slice().reverse().map((data,index)=>{
+            {data.map((data,index)=>{
                 return(
                     <div className="container" key={index}>
                         <div className="contsiner-top">
                             {data.rating}  <span>...</span>
                         </div>
-                        <div className="name">{data.name}</div>
-                        <div className="">{data.comment}</div>
-                        <div className="date">{data.date}</div>
+                        <h2 className="name">{data.name}</h2>
+                        <div className="reviews">{data.comment}</div>
+                        <div className="date">Time: {data.date?.toDate? formatDistanceToNow(data.date.toDate(),{addSuffix: true}):"No date"}</div>
                     </div>
                 )
             })}
