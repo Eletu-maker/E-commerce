@@ -1,27 +1,20 @@
-
 import { getApps, initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { doc, getFirestore, setDoc } from "firebase/firestore";
-
+import { doc, getFirestore, setDoc, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB7znu65F8Ekh2_MVHHU-aEbzsrmNsnTug",
-  authDomain: "e-commerce-2fa30.firebaseapp.com",
-  projectId: "e-commerce-2fa30",
-  storageBucket: "e-commerce-2fa30.firebasestorage.app",
-  messagingSenderId: "857147895345",
-  appId: "1:857147895345:web:55d3d51004748cb0046f10"
+  apiKey: "AIzaSyAwrmQ1JKtGcBSI19pbLfez9LenQhfz7yg",
+  authDomain: "e-come-9d908.firebaseapp.com",
+  projectId: "e-come-9d908",
+  storageBucket: "e-come-9d908.firebasestorage.app",
+  messagingSenderId: "49339314001",
+  appId: "1:49339314001:web:43f3606dde067a3b202d70"
 };
-
-
 
 const app =  initializeApp(firebaseConfig);
 
-
 const auth = getAuth(app)
 const db = getFirestore(app)
-
-
 
 const signUp = async (name,email,password)=>{
     try{
@@ -34,17 +27,17 @@ const signUp = async (name,email,password)=>{
         name,
         authProvider: "local",
         email,
-        cart:[]
+        cart:[],
+        comment: []
        });
 
        return user;
     }catch(err){
-        console.log(err)
-        alert(err)
-        return null;
+      console.log(err)
+      alert(err)
+      return null;
     }
 }
-
 
 const login = async (email, password) =>{
     try{
@@ -53,6 +46,7 @@ const login = async (email, password) =>{
     }catch(err){
         console.log(err)
         alert(err)
+        return null; 
     }
 }
 
@@ -60,5 +54,96 @@ const logout = () =>{
     signOut(auth);
 }
 
- 
-export {auth,db,login,signUp,logout}
+// Function to save cart data to Firestore
+const saveCartToFirestore = async (userId, cartItems) => {
+  try {
+    // Calculate total price
+    const totalPrice = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    
+    // Create items object with productId as key and quantity as value
+    const items = {};
+    cartItems.forEach(item => {
+      items[item.id] = item.quantity;
+    });
+    
+    // Create cart data object
+    const cartData = {
+      date: new Date(),
+      items: items,
+      totalPrice: totalPrice
+    };
+    
+    // Save to Firestore under user's carts collection
+    const cartRef = collection(db, "users", userId, "carts");
+    const docRef = await addDoc(cartRef, cartData);
+    
+    return docRef.id;
+  } catch (error) {
+    console.error("Error saving cart to Firestore:", error);
+    return null;
+  }
+};
+
+// Function to fetch user's cart history from Firestore
+const getUserCartHistory = async (userId) => {
+  try {
+    const cartsRef = collection(db, "users", userId, "carts");
+    const q = query(cartsRef, orderBy("date", "desc"));
+    const querySnapshot = await getDocs(q);
+    
+    const cartHistory = [];
+    querySnapshot.forEach((doc) => {
+      cartHistory.push({
+        id: doc.id,
+        ...doc.data()
+      });
+    });
+    
+    return cartHistory;
+  } catch (error) {
+    console.error("Error fetching cart history:", error);
+    return [];
+  }
+};
+
+// Function to submit a comment/review to Firestore
+const submitComment = async (commentData) => {
+  try {
+    const commentRef = await addDoc(collection(db, "comments"), {
+      username: commentData.username,
+      userId: commentData.userId,
+      description: commentData.description,
+      rating: commentData.rating,
+      date: serverTimestamp(),
+    });
+    
+    return commentRef.id;
+  } catch (error) {
+    console.error("Error submitting comment:", error);
+    throw error;
+  }
+};
+
+// Function to fetch all comments from Firestore
+const getAllComments = async () => {
+  try {
+    const commentsRef = collection(db, "comments");
+    const q = query(commentsRef, orderBy("date", "desc"));
+    const querySnapshot = await getDocs(q);
+    
+    const comments = [];
+    querySnapshot.forEach((doc) => {
+      comments.push({
+        id: doc.id,
+        ...doc.data()
+      });
+    });
+    
+    return comments;
+  } catch (error) {
+    console.error("Error fetching comments:", error);
+    return [];
+  }
+};
+
+export {auth,db,login,signUp,logout,saveCartToFirestore,getUserCartHistory,submitComment,getAllComments}

@@ -7,11 +7,11 @@ import Order from '../../Component/Order/Order'
 import Reviews from '../../Component/Reviews/Reviews'
 import Other from '../../Component/Other/Other'
 import { useParams } from 'react-router-dom'
-import { useUser } from '../../UserContext'
+// import { useUser } from '../../UserContext'
 
 const Product_Details = () => {
 
-  const {user} = useUser
+  // const {user} = useUser
 
   const {id} = useParams()
   return (

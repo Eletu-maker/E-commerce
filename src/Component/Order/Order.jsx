@@ -1,84 +1,69 @@
 import React, { useEffect, useState } from 'react'
 import './Order.css'
+import { showSuccess, showError } from '../../utils/notification'
 import { useUser } from '../../UserContext'
-import { db } from '../../firebase'
-import { doc, documentId, setDoc, updateDoc } from 'firebase/firestore'
-
 
 const Order = ({ theProduct }) => {
- const { user, setUser } = useUser();
+  const { addToCart } = useUser()
   const [apiData, setApiData] = useState(null)
   const [count, setCount] = useState(1)
-   const [image,setImage] = useState(null)
+  const [image,setImage] = useState(null)
   
-     useEffect(() => {
-    fetch(`https://dummyjson.com/products/${theProduct}`)
+  useEffect(() => {
+    fetch(`https://fakestoreapi.com/products/${theProduct}`)
       .then(res => res.json())
-      .then(res => {setApiData(res) ; setImage(res.images[0])})
+      .then(res => {setApiData(res) ; setImage(res.image)})
   
       .catch(err => console.error(err))
   }, [theProduct])
-
-
-
-const updateCartInFirestore = async (uid, newCart) => {
-  const userRef = doc(db, "users", uid);
-  try {
-    await setDoc(userRef, { cart: newCart }, { merge: true }); 
-    console.log("Cart updated in Firestore");
-  } catch (err) {
-    console.error("Failed to update cart:", err);
-  }
-};
  
-  const addToCart = async () => {
-  const product = {
-    good: `https://dummyjson.com/products/${theProduct}`,
-    num: count
+  const addToCartHandler = async () => {
+    try {
+      if (!apiData) {
+        showError("Product data not loaded yet");
+        return;
+      }
+      
+      // Create cart item object
+      const cartItem = {
+        id: apiData.id,
+        title: apiData.title,
+        price: apiData.price,
+        image: apiData.image,
+        quantity: count
+      };
+      
+      // Add to cart using context
+      addToCart(cartItem);
+      
+      showSuccess("Product added to cart successfully");
+    } catch (err) {
+      console.error(err);
+      showError("Failed to add product to cart. Try again.");
+    }
   };
-
-  const updatedCart = [...user.cart, product];
-console.log("Updating Firestore with cart:", updatedCart);
-  try {
-    
-    
-   await updateCartInFirestore(user.uid, updatedCart);
-   setUser({ ...user, cart: updatedCart });
-    alert("Product added successfully");
-  } catch (err) {
-    console.error(err);
-    alert("Failed to update cart. Try again.");
-  }
-};
-
-console.log(user)
-
-  
 
   const increment = () => setCount(count + 1)
   const decrement = () => setCount(count > 1 ? count - 1 : count)
-
   
   if (!apiData) return <p>Loading...</p>
 
-  
 
   return (
     <div className="oder">
       <div className="order-display">
         <div className="small-display">
-          {apiData.images.slice(0, apiData.images.length).map((img, idx) => (
-            <div key={idx}><img src={img} alt={`product-thumb-${idx}`}n onClick={() => setImage(img)} className="small-image" /></div>
-          ))}
+          {/* For Fake Store API, we only have one image */}
+          <div><img src={apiData.image} alt={`product-thumb`} className="small-image" /></div>
         </div>
         <div className="big-display">
-          <img src={image} alt={apiData.title} />
+          <img src={apiData.image} alt={apiData.title} />
         </div>
       </div>
 
       <div className="order-details">
         <h1 className='order-details-name'>{apiData.title}</h1>
-        <p className='order-details-rating'>Rating: {apiData.rating}</p>
+        <p className='order-details-rating'>Rating: {apiData.rating?.rate} ({apiData.rating?.count} reviews)</p>
         <p className='order-details-price'>Price: ${apiData.price}</p>
         <p className='order-details-description'>{apiData.description}</p>
 
@@ -105,7 +90,7 @@ console.log(user)
             <p className='value'>{count}</p>
             <p className='increment' onClick={increment}>+</p>
           </div>
-          <div className="add-cart" onClick={addToCart}>
+          <div className="add-cart" onClick={addToCartHandler}>
             Add to Cart
           </div>
         </div>

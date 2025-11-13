@@ -1,6 +1,5 @@
 .home hr{
-margin: 0 40px;
-
+  margin: 0 40px;
 }
 
 .welcome-user {
@@ -8,4 +7,74 @@ margin: 0 40px;
   font-weight: bold;
   margin: 1rem;
   color: #333;
+}
+
+.notification-demo {
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.notification-demo h3 {
+  margin-top: 0;
+}
+
+.notification-demo button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.notification-demo button:hover {
+  opacity: 0.8;
+}
+
+/* Responsive styles for tablets */
+@media screen and (max-width: 768px) {
+  .home hr {
+    margin: 0 20px;
+  }
+  
+  .welcome-user {
+    font-size: 1.3rem;
+    margin: 0.8rem;
+  }
+  
+  .notification-demo {
+    padding: 15px;
+    margin: 15px;
+  }
+  
+  .notification-demo button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsive styles for mobile phones */
+@media screen and (max-width: 480px) {
+  .home hr {
+    margin: 0 10px;
+  }
+  
+  .welcome-user {
+    font-size: 1.1rem;
+    margin: 0.5rem;
+  }
+  
+  .notification-demo {
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  .notification-demo button {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    margin: 3px;
+  }
 }

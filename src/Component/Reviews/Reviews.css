@@ -1,67 +1,348 @@
-
-.review{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.review {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  background: #f8f8f8;
+  border-radius: 15px;
+  margin: 20px 0;
 }
 
-.review-filter{
-    display: flex;
-    gap: 10px;
+.review-text {
+  font-family: 'integral cf', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #333;
 }
 
-.frame{
-    background: rgba(0, 0, 0, 0.4);
-    padding: 5px 10px;
-    border-radius: 20px;
-    border: none;
+.review-text span {
+  color: #666;
+  font-size: 20px;
 }
 
-.frame img{
-    width: 15px;
+.review-filter {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.latest{
-     background: rgba(0, 0, 0, 0.4);
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: none;
+.frame {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-.write{
-    background: black;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
+.frame:hover {
+  background: rgba(0, 0, 0, 0.2);
 }
 
-.comments{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
+.frame img {
+  width: 15px;
 }
 
-
-.container{
-    background: rgba(0, 0, 0, 0.4);
-    margin: 10px;
-    padding: 20px;
-    border-radius: 20px;
+.latest {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
 }
 
-.contsiner-top{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+.latest:hover {
+  background: rgba(0, 0, 0, 0.2);
 }
 
-.button{
-    margin: 5px;
-    display: flex;
-    justify-content: center;
+.write {
+  background: black;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.write:hover {
+  background: #333;
+}
+
+.comments {
+  padding: 20px;
+}
+
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.contsiner-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rating {
+  color: #ffa500;
+  font-weight: bold;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.reviews {
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.date {
+  color: #888;
+  font-size: 14px;
+  text-align: right;
 }
 
 .button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #555;
+}
+
+/* Comment Section Styling (copied from Comment.css) */
+.comment {
+  padding: 40px 20px;
+}
+
+.comment h1 {
+  font-family: 'integral cf', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  text-align: center;
+  padding: 20px 0;
+  margin: 0;
+}
+
+.comment-containers {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  overflow-x: auto;
+  background: rgba(85, 85, 85, 0.1);
+  border-radius: 20px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.comment-containers::-webkit-scrollbar {
+  display: none;
+}
+
+.comment-container {
+  flex: 0 0 auto;
+  width: 350px;
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.comment-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.comment-container .rating {
+  color: #ffa500;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.comment-container .comment-name {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 10px 0;
+  color: #333;
+}
+
+.comment-container .comment-text {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+  margin: 15px 0;
+}
+
+.comment-container .date {
+  font-size: 14px;
+  color: #888;
+  text-align: right;
+  margin-top: 15px;
+  font-style: italic;
+}
+
+/* Responsive styles for tablets */
+@media screen and (max-width: 768px) {
+  .review {
+    padding: 15px;
+  }
+  
+  .review-text {
+    font-size: 20px;
+  }
+  
+  .review-text span {
+    font-size: 16px;
+  }
+  
+  .comments {
+    padding: 15px;
+  }
+  
+  .container {
+    padding: 15px;
+  }
+  
+  .name {
+    font-size: 16px;
+  }
+  
+  .reviews {
+    font-size: 14px;
+  }
+  
+  /* Comment section responsive styles */
+  .comment {
+    padding: 30px 15px;
+  }
+  
+  .comment h1 {
+    font-size: 28px;
+    padding: 15px 0;
+  }
+  
+  .comment-containers {
+    gap: 15px;
+    padding: 15px 0;
+  }
+  
+  .comment-container {
+    width: 300px;
+    padding: 20px;
+  }
+  
+  .comment-container .comment-name {
+    font-size: 18px;
+  }
+  
+  .comment-container .comment-text {
+    font-size: 14px;
+  }
+  
+  .comment-container .rating,
+  .comment-container .date {
+    font-size: 13px;
+  }
+}
+
+/* Responsive styles for mobile phones */
+@media screen and (max-width: 480px) {
+  .review {
     padding: 10px;
-    place-self: center;
-    margin: 20px 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .review-filter {
+    margin-top: 10px;
+  }
+  
+  .review-text {
+    font-size: 18px;
+  }
+  
+  .review-text span {
+    font-size: 14px;
+  }
+  
+  .comments {
+    padding: 10px;
+  }
+  
+  .container {
+    padding: 10px;
+  }
+  
+  .name {
+    font-size: 14px;
+  }
+  
+  .reviews {
+    font-size: 12px;
+  }
+  
+  .date {
+    font-size: 12px;
+  }
+  
+  /* Comment section responsive styles */
+  .comment {
+    padding: 20px 10px;
+  }
+  
+  .comment h1 {
+    font-size: 24px;
+    padding: 10px 0;
+  }
+  
+  .comment-containers {
+    gap: 10px;
+    padding: 10px 0;
+  }
+  
+  .comment-container {
+    width: 280px;
+    padding: 15px;
+  }
+  
+  .comment-container .rating {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  
+  .comment-container .comment-name {
+    font-size: 16px;
+    margin: 8px 0;
+  }
+  
+  .comment-container .comment-text {
+    font-size: 13px;
+    margin: 10px 0;
+  }
+  
+  .comment-container .date {
+    font-size: 12px;
+    margin-top: 10px;
+  }
 }

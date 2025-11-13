@@ -1,31 +1,26 @@
-
-import { useEffect, useState } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebase';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../UserContext';
 
 const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { user, loading } = useUser();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsAuthenticated(true);
-      } else {
-        setIsAuthenticated(false);
-        navigate('/');
-      }
-      setLoading(false);
-    });
+    // Check if user is not authenticated and not loading
+    if (!loading && !user) {
+      // Redirect to login page
+      navigate('/Login', { replace: true });
+    }
+  }, [user, loading, navigate]);
 
-    return () => unsubscribe();
-  }, [navigate]);
+  // Show loading state while checking authentication
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-  if (loading) return <div>Loading...</div>;
-
-  return isAuthenticated ? children : null;
+  // If user is authenticated, render children; otherwise render nothing (redirect will happen)
+  return user ? children : null;
 };
 
 export default ProtectedRoute;

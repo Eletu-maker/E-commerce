@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import comments from '../../assets/demo_data/comment_data'
-import { useUser } from '../../UserContext';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { db } from '../../firebase';
 
+import { useUser } from '../../UserContext';
+import { submitComment } from '../../firebase';
+import { showSuccess, showError } from '../../utils/notification';
+import './MessageBox.css';
 
 const MessageBox = ({condition }) => {
 
-  const {user} = useUser()
+  const {user, addNewReview} = useUser()
 
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(0);
@@ -18,51 +18,91 @@ const MessageBox = ({condition }) => {
     
  const submit = async(e)=>{
   e.preventDefault();
-  if (!comment.trim()) return;
+  if (!comment.trim() || rating === 0) {
+    showError("Please provide both a review and a rating");
+    return;
+  }
 
   try{
-    await addDoc(collection(db,"comments"),{
-        name: user.name,
-        uid: user.uid,
-        comment ,
-        rating,
-        date: serverTimestamp(),
-    })
+    // Prepare comment data
+    const commentData = {
+      username: user.name,
+      userId: user.uid,
+      description: comment,
+      rating: rating
+    };
 
-  alert("Review upload")
-  condition()
+    // Submit comment to Firestore
+    await submitComment(commentData);
+
+    // Add the new review to context for immediate display
+    const newReviewData = {
+      ...commentData,
+      id: Date.now(), // Temporary ID for immediate display
+      date: new Date() // Current date for immediate display
+    };
+    
+    addNewReview(newReviewData);
+
+    showSuccess("Review submitted successfully!")
+    condition()
   }catch(err){
-    alert(err)
+    showError("Error submitting review: " + err.message)
     console.log(err)
   }
   
  }
 
+ // Function to handle star rating
+ const handleStarClick = (starRating) => {
+   setRating(starRating);
+ };
 
-    
   return (
-    <form onSubmit={submit}>
-      <label>
-        Enter your message:
-        <br />
-        <textarea  onChange={message} rows={5} cols={40}
-         placeholder='Enter your message' value={comment}></textarea>
-      </label>
-      <br />
-      <label>
-  Rating (1 to 5): 
-  <input
-    type="number"
-    min="1"
-    max="5"
-    value={rating}
-    onChange={(e) => setRating(Number(e.target.value))}
-  />
-</label>
-
-      <button onClick={condition}>cancel</button>
-      <button type="submit" >submit</button>
-    </form>
+    <div className="message-box-overlay">
+      <div className="message-box-container">
+        <h2>Write a Review</h2>
+        <form onSubmit={submit}>
+          <label>
+            Your Review:
+            <textarea 
+              onChange={message} 
+              rows={5} 
+              placeholder='Share your experience with this product...'
+              value={comment}
+              required
+            ></textarea>
+          </label>
+          
+          <label>
+            Rating:
+            <div className="rating-container">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  className={`star-rating ${star <= rating ? 'filled' : ''}`}
+                  onClick={() => handleStarClick(star)}
+                >
+                  ★
+                </span>
+              ))}
+              <span style={{ marginLeft: '10px', fontSize: '16px', color: '#555' }}>
+                {rating}/5
+              </span>
+            </div>
+          </label>
+          
+          <div className="button-container">
+            <button type="button" className="cancel-button" onClick={condition}>
+              Cancel
+            </button>
+            <button type="submit" className="submit-button">
+              Submit Review
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   )
 }
 

@@ -1,124 +1,195 @@
 .footer-top{
-    background: black;
-    border-radius: 50px;
-    display: flex;
-        justify-content: space-evenly;
-            align-items: center;
-            margin: 20px 50px;
-            padding: 25px;
-    position: relative;
-    top: 110px;
-
+  background: black;
+  border-radius: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 20px 50px;
+  padding: 25px;
+  position: relative;
+  top: 110px;
 }
 
 .footer-top-text p{
-    color: white;
-    font-family: 'integral cf';
-    font-weight: 700;
-    font-size: 40px;
-    font-style: bold;
-    line-height: 45px;
-
+  color: white;
+  font-family: 'integral cf';
+  font-weight: 700;
+  font-size: 40px;
+  font-style: bold;
+  line-height: 45px;
 }
 
 .footer-top-button .input{
-    background: white;
-    width: 400px;
-    padding: 12px ;
-    border-radius: 40px;
-    display: flex;
-    margin-bottom: 20px;
-    
+  background: white;
+  width: 400px;
+  padding: 12px;
+  border-radius: 40px;
+  display: flex;
+  margin-bottom: 20px;
 }
 
 .footer-top-button input{
-        border: none;
-    outline: none;
-    width: 400px;
-    background: transparent;
-    padding-left: 10px;
-
+  border: none;
+  outline: none;
+  width: 400px;
+  background: transparent;
+  padding-left: 10px;
 }
 
 .footer-top-button button{
-    width: 400px;
-    padding: 10px;
-    border-radius: 40px;
-    font-family: 'Satoshi';
-    font-weight: 500;
-    font-style: medium;
-    font-size: 16px;
+  width: 400px;
+  padding: 10px;
+  border-radius: 40px;
+  font-family: 'Satoshi';
+  font-weight: 500;
+  font-style: medium;
+  font-size: 16px;
 }
 
 .footer-buttom .logo h1{
-    font-family: 'integral cf';
-    font-weight: 700;
-    font-style: bold;
-    font-size: 33.45px;
+  font-family: 'integral cf';
+  font-weight: 700;
+  font-style: bold;
+  font-size: 33.45px;
 }
 
 .footer-buttom .logo p{
-    font-family: 'Satoshi';
-    font-weight: 400;
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.6);
+  font-family: 'Satoshi';
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .footer-buttom .logo .twitter{
-    background: white;
-    border-radius: 50%;
-     margin-left: 10px;
+  background: white;
+  border-radius: 50%;
+  margin-left: 10px;
 }
 
-
 .footer-buttom .logo .fb{
-    background: black;
-    border-radius: 50%;
-    margin-left: 10px;
+  background: black;
+  border-radius: 50%;
+  margin-left: 10px;
 }
 
 .footer-buttom{
-    background: #f0f0f0;
-    
-    
-
+  background: #f0f0f0;
 }
 
-
 .footer-collection{
-display: flex;
-    justify-content: space-evenly;
-    padding-top: 130px;
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 130px;
 }
 
 .footer-buttom-list ul{
-    list-style: none;
+  list-style: none;
 }
 
 .footer-buttom-list h2{
-    font-family: 'Satoshi';
-    font-weight: 500;
-    font-size: 16px;
-    padding-bottom: 10px;
+  font-family: 'Satoshi';
+  font-weight: 500;
+  font-size: 16px;
+  padding-bottom: 10px;
 }
 
 .footer-buttom-list li{
-    padding: 5px 0;
-    font-family: 'Satoshi';
-    font-weight: 400;
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.6);
-    cursor: pointer;
+  padding: 5px 0;
+  font-family: 'Satoshi';
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
 }
 
 .end{
-    padding: 20px 40px 40px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
+  padding: 20px 40px 40px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .end .end-img{
-    display: flex;
+  display: flex;
+}
+
+/* Responsive styles for tablets */
+@media screen and (max-width: 768px) {
+  .footer-top {
+    margin: 20px 20px;
+    padding: 20px;
+    flex-direction: column;
+    text-align: center;
+    top: 80px;
+  }
+  
+  .footer-top-text p {
+    font-size: 32px;
+    line-height: 36px;
+  }
+  
+  .footer-top-button .input,
+  .footer-top-button input,
+  .footer-top-button button {
+    width: 300px;
+  }
+  
+  .footer-collection {
+    flex-direction: column;
+    padding-top: 100px;
+    gap: 30px;
+  }
+  
+  .end {
+    padding: 20px;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .end .end-img {
+    justify-content: center;
+  }
+}
+
+/* Responsive styles for mobile phones */
+@media screen and (max-width: 480px) {
+  .footer-top {
+    margin: 15px 10px;
+    padding: 15px;
+    top: 60px;
+  }
+  
+  .footer-top-text p {
+    font-size: 24px;
+    line-height: 28px;
+  }
+  
+  .footer-top-button .input,
+  .footer-top-button input,
+  .footer-top-button button {
+    width: 250px;
+  }
+  
+  .footer-buttom .logo h1 {
+    font-size: 28px;
+  }
+  
+  .footer-collection {
+    padding-top: 80px;
+    gap: 20px;
+  }
+  
+  .footer-buttom-list h2 {
+    font-size: 14px;
+  }
+  
+  .footer-buttom-list li {
+    font-size: 12px;
+  }
+  
+  .end {
+    padding: 15px;
+    gap: 15px;
+  }
 }

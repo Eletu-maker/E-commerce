@@ -1,9 +1,170 @@
-.other h1{
-    place-self: center;
-    margin: 20px 0;
+.other {
+  padding: 40px 20px;
+  text-align: center;
 }
 
-.other-containers{
-    display: flex;
-    justify-content: space-evenly;
+.other h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-button.left {
+  left: 10px;
+}
+
+.carousel-button.right {
+  right: 10px;
+}
+
+.other-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 20px;
+  padding: 20px 0;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.other-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.item-container {
+  flex: 0 0 auto;
+  width: 200px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.item-container:hover {
+  transform: translateY(-5px);
+  border: 2px solid #000;
+}
+
+.item-image {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.item-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 10px 0;
+  height: 40px;
+  overflow: hidden;
+}
+
+.item-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+}
+
+/* Responsive styles for tablets */
+@media screen and (max-width: 768px) {
+  .other {
+    padding: 30px 15px;
+  }
+  
+  .other h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .item-container {
+    width: 180px;
+    padding: 12px;
+  }
+  
+  .item-image {
+    height: 130px;
+  }
+  
+  .item-name {
+    font-size: 14px;
+    height: 35px;
+  }
+  
+  .item-price {
+    font-size: 16px;
+  }
+  
+  .carousel-button {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+  }
+}
+
+/* Responsive styles for mobile phones */
+@media screen and (max-width: 480px) {
+  .other {
+    padding: 20px 10px;
+  }
+  
+  .other h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .item-container {
+    width: 150px;
+    padding: 10px;
+  }
+  
+  .item-image {
+    height: 110px;
+  }
+  
+  .item-name {
+    font-size: 13px;
+    height: 30px;
+  }
+  
+  .item-price {
+    font-size: 15px;
+  }
+  
+  .carousel-button {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
+  
+  .other-container {
+    gap: 15px;
+  }
 }

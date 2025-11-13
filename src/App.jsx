@@ -4,10 +4,10 @@ import Home from './Pages/Home/Home';
 import Product_Details from './Pages/Product_Details/Product_Details';
 import React, { useState } from 'react';
 import Login from './Pages/Login/Login';
-import ProtectedRoute from './Component/ProtectedRoute'; // 👈
+import ProtectedRoute from './ProtectedRoute';
 import { UserProvider } from './UserContext';
 import Cart from './Pages/Cart/Cart';
-
+import Profile from './Pages/Profile/Profile';
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -15,9 +15,6 @@ function App() {
   const handleItemSelect = (product) => {
     setSelectedProduct(product);
   };
-
- 
-
 
   const router = createBrowserRouter([
     {
@@ -40,13 +37,29 @@ function App() {
         </ProtectedRoute>
       ),
     },
-     {
+    {
       path: '/Cart',
       element: (
         <ProtectedRoute>
           <Cart />
         </ProtectedRoute>
       ),
+    },
+    {
+      path: '/Profile',
+      element: (
+        <ProtectedRoute>
+          <Profile />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: '/Login',
+      element: <Login />,
+    },
+    {
+      path: '*',
+      element: <Login />,
     },
   ]);
 

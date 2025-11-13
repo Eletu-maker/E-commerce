@@ -1,13 +1,11 @@
 .new-arrivals{
-    padding: 25px ;
+  padding: 25px 20px;
 }
 
 .button-wrapper {
   display: flex;
   justify-content: center;
   margin-top: 40px;
-
-  
 }
 
 .button-wrapper button {
@@ -15,50 +13,108 @@
   cursor: pointer;
 }
 
-
 .new-arrivals h1{
-    display: flex;
-    justify-content: center;
-    font-family: 'integral cf', sans-serif;
-    font-weight: 700;
-    font-size: 48px;
-    font-weight: bold;
-    padding: 20px 0;
-    
-
-   
+  display: flex;
+  justify-content: center;
+  font-family: 'integral cf', sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  font-weight: bold;
+  padding: 20px 0;
 }
 
 .new-arrivals-container{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .item-image{
-    width: 295px;
-    height: 298px;
-    border-radius: 50px;
+  width: 100%;
+  height: 298px;
+  border-radius: 50px;
 }
 
 .item-name{
-    font-family: 'satoshi';
-    font-weight: 700;
-    font-style: bold;
-    font-size: 20px;
+  font-family: 'satoshi';
+  font-weight: 700;
+  font-style: bold;
+  font-size: 20px;
 }
 
 .item-price{
-    font-family: 'satoshi';
-    font-weight: 700;
-    font-style: bold;
-    font-size: 24px;
+  font-family: 'satoshi';
+  font-weight: 700;
+  font-style: bold;
+  font-size: 24px;
 }
 
 .arrivals-container{
-    background: gray;
-    border-radius: 30px;
-    padding: 10px;
+  background: gray;
+  border-radius: 30px;
+  padding: 10px;
+}
+
+/* Responsive styles for tablets */
+@media screen and (max-width: 768px) {
+  .new-arrivals {
+    padding: 20px 15px;
+  }
+  
+  .new-arrivals h1 {
+    font-size: 36px;
+    padding: 15px 0;
+  }
+  
+  .new-arrivals-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .item-image {
+    height: 250px;
+  }
+  
+  .item-name {
+    font-size: 18px;
+  }
+  
+  .item-price {
+    font-size: 20px;
+  }
+}
+
+/* Responsive styles for mobile phones */
+@media screen and (max-width: 480px) {
+  .new-arrivals {
+    padding: 15px 10px;
+  }
+  
+  .new-arrivals h1 {
+    font-size: 28px;
+    padding: 10px 0;
+  }
+  
+  .new-arrivals-container {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .item-image {
+    height: 200px;
+  }
+  
+  .item-name {
+    font-size: 16px;
+  }
+  
+  .item-price {
+    font-size: 18px;
+  }
+  
+  .arrivals-container {
+    padding: 8px;
+  }
 }

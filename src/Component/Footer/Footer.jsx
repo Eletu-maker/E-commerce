@@ -1,14 +1,14 @@
 import React from 'react'
 import './Footer.css'
-import mail from '../../assets/mail.png'
-import twitter from '../../assets/twitter.png'
-import fb from '../../assets/fb.png'
-import instagram from '../../assets/instagram.png'
-import github from '../../assets/github.png'
-import a_pay from '../../assets/apple-pay.png'
-import g_pay from '../../assets/g-pay.png'
-import visa from '../../assets/visa.png'
-import paypal from '../../assets/paypal.png'
+import mail from '../../assets/mail.svg'
+import twitter from '../../assets/twitter.svg'
+import fb from '../../assets/fb.svg'
+import instagram from '../../assets/instagram.svg'
+import github from '../../assets/github.svg'
+import a_pay from '../../assets/apple-pay.svg'
+import g_pay from '../../assets/g-pay.svg'
+import visa from '../../assets/visa.svg'
+import paypal from '../../assets/paypal.svg'
 const Footer = () => {
   return (
     <div className='footer'>
