@@ -74,6 +74,10 @@
   font-weight: bold;
 }
 
+.profile{
+  cursor: pointer;
+}
+
 /* Responsive styles for tablets */
 @media screen and (max-width: 768px) {
   .navbar {

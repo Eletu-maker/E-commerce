@@ -6,6 +6,9 @@ import { UserProvider } from './UserContext.jsx'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
+// Handle base URL for Vercel deployment
+const baseUrl = import.meta.env.BASE_URL || '/';
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
