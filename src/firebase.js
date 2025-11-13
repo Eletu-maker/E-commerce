@@ -2,6 +2,7 @@ import { getApps, initializeApp } from "firebase/app";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
@@ -34,6 +35,24 @@ const firebaseConfig = {
 const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+// --- Listen for authentication state ---
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log("✅ User signed in:", user.uid);
+
+    // Example: load user data and cart
+    getUserCartHistory(user.uid).then((history) => {
+      console.log("User cart history:", history);
+    });
+
+    // Optionally: fetch user profile or other data here
+  } else {
+    console.log("⚠️ No user signed in");
+    // You can redirect to login page or show guest view here
+  }
+});
+
+
 
 // --- SIGN UP ---
 const signUp = async (name, email, password) => {
