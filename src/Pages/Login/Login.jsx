@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./Login.css";
 import Loading from "../../assets/Loading_icon.gif";
-import { signUp, login, db, auth } from '../../firebase';
+import { signUp, login, db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../UserContext';
 import { collection, getDocs, query, where } from 'firebase/firestore';
@@ -17,7 +17,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  
   useEffect(() => {
     if (user) {
       navigate("/Home");
@@ -37,8 +36,14 @@ const Login = () => {
         userCredential = await signUp(name, userEmail, password);
       }
 
-      
-      if (!userCredential || !userCredential.user) {
+      // ✅ Handle errors properly
+      if (userCredential?.error) {
+        showError(userCredential.error.message || "Authentication failed.");
+        setLoading(false);
+        return;
+      }
+
+      if (!userCredential?.user) {
         showError("Authentication failed.");
         setLoading(false);
         return;
@@ -47,7 +52,7 @@ const Login = () => {
       const userData = userCredential.user;
       setUser(userData);
 
-      
+      // Fetch user document from Firestore
       const q = query(collection(db, "users"), where("uid", "==", userData.uid));
       const querySnapshot = await getDocs(q);
 
@@ -85,6 +90,7 @@ const Login = () => {
                 onChange={(e) => setName(e.target.value)}
                 type="text"
                 placeholder="Your name"
+                required
               />
             )}
 
