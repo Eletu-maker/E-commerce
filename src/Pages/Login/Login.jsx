@@ -39,14 +39,14 @@ const Login = () => {
       // ✅ Handle errors properly
       if (userCredential?.error) {
         console.log("error1")
-        showError(userCredential.error.message || "Authentication failed.");
+        showError(userCredential.error.message );
         setLoading(false);
         return;
       }
 
       if (!userCredential?.user) {
         console.log("error2")
-        showError("Authentication failed.");
+        
         setLoading(false);
         return;
       }
