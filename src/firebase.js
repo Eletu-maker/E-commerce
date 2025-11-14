@@ -36,23 +36,23 @@ const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 // --- Listen for authentication state ---
+
+let initialized = false;
 onAuthStateChanged(auth, (user) => {
+  if (!initialized) {
+    initialized = true;
+    return; // ignore first null state
+  }
+
   if (user) {
     console.log("✅ User signed in:", user.uid);
-
-    // Example: load user data and cart
     getUserCartHistory(user.uid).then((history) => {
       console.log("User cart history:", history);
     });
-
-    // Optionally: fetch user profile or other data here
   } else {
-    console.log("⚠️ No user signed in");
-    // You can redirect to login page or show guest view here
+    console.log("⚠️ User logged out");
   }
 });
-
-
 
 // --- SIGN UP ---
 const signUp = async (name, email, password) => {
@@ -72,11 +72,11 @@ const signUp = async (name, email, password) => {
       createdAt: serverTimestamp(),
     });
 
-    return user;
+      return { user: res.user, error: null };
   } catch (err) {
     console.error("Signup error:", err);
     showError?.(err.message || "Sign-up failed"); // optional unified notification
-    return null;
+    return { user: null, error: err };
   }
 };
 
@@ -84,11 +84,11 @@ const signUp = async (name, email, password) => {
 const login = async (email, password) => {
   try {
     const res = await signInWithEmailAndPassword(auth, email, password);
-    return res.user;
+    return { user: res.user, error: null };
   } catch (err) {
     console.error("Login error:", err);
     showError?.(err.message || "Login failed");
-    return null;
+    return { user: null, error: err };
   }
 };
 
