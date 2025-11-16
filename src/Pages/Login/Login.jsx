@@ -38,8 +38,8 @@ const Login = () => {
 
       // ✅ Handle errors properly
       if (userCredential?.error) {
-        console.log("error1")
-        showError(userCredential.error.message );
+        
+        console.log(userCredential.error.message );
         setLoading(false);
         return;
       }
